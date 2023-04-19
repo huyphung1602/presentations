@@ -180,15 +180,89 @@ transition: slide-up
 level: 2
 ---
 # Selections
-##
+Selections are the basic unit of interaction in D3.js. They allow you to query and traverse the DOM.
 
-- The basic unit of interaction in D3.js. Allows you to query and traverse the DOM.
-- Made up of one or more DOM nodes
-- Created using d3.select() and d3.selectAll()
-- Can be aggregated into larger selections
-- Select elements with selectors (div, #id, .class, etc.)
-- Call .select() and .selectAll()
-- Append, set attributes, call methods, add events, chain operations
+**Making a selection**
+- Use d3.select() to select one element:
+```js
+d3.select("div")  // Selects first div
+```
+
+- d3.select() uses querySelector() under the hood to find the first matching element.
+- Use d3.selectAll() to select multiple elements:
+
+```js
+d3.selectAll("div") // Selects all divs
+```
+- d3.selectAll() uses querySelectorAll() under the hood to find all matching elements.
+
+---
+transition: slide-up
+level: 2
+---
+# Selections
+Selections are the basic unit of interaction in D3.js. They allow you to query and traverse the DOM.
+
+- Select by ID (#), class (.), tag name, attribute, or node:
+```js
+d3.select("#id");   // Uses getElementById()
+d3.select(".class");   // Uses getElementsByClassName()
+d3.select("div");      // Uses querySelector()
+d3.select("[attr]");  // Uses querySelector()
+d3.select(node);      // Just passes through node
+```
+
+---
+transition: slide-up
+level: 2
+---
+# Selections
+Selections are the basic unit of interaction in D3.js. They allow you to query and traverse the DOM.
+
+**Selecting and chaining**
+- Store selection in a variable to operate on later
+- Use method chaining to apply multiple operations to a selection sequentially:
+```js
+let divSelection = d3.selectAll("div")
+                     .attr("class", "bar")     // Set attribute
+                     .style("color", "blue")   // Set style
+```
+
+- Each method call returns the selection, allowing the next method to be called on the same selection.
+
+---
+transition: slide-up
+level: 2
+---
+# Selections
+Selections are the basic unit of interaction in D3.js. They allow you to query and traverse the DOM.
+
+**Appending elements**
+- Use .append() to add an element to each node in the selection:
+```js
+divSelection.append("p")   // Add <p> to each div
+```
+
+- .append() uses element.appendChild() to append a child element to each node in the selection.
+
+---
+transition: slide-up
+level: 2
+---
+# Selections
+Selections are the basic unit of interaction in D3.js. They allow you to query and traverse the DOM.
+
+**Other selection methods**
+- .attr() - Get or set attributes
+- .text() - Get or set text content
+- .html() - Get or set inner HTML
+- .style() - Get or set styles
+- .on() - Add event listeners
+- .data() - Bind data (covered in Data Binding slides)
+- .enter() - Get "enter" selection (covered in Data Binding slides)
+- .exit() - Get "exit" selection  (covered in Data Binding slides)
+- .remove() - Remove elements from document
+- And many more! Selections are a core part of D3.
 
 ---
 transition: slide-up
@@ -381,7 +455,7 @@ transition: fade-out
 ---
 
 # Demo 1
-## Basic Concept
+## Basic Concepts
 
 
 ---
