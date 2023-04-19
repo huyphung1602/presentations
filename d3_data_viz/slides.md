@@ -59,7 +59,7 @@ transition: fade-out
 
 # Table of contents
 
-<Toc></Toc>
+<Toc max-depth="1"></Toc>
 
 ---
 layout: section
@@ -71,7 +71,6 @@ transition: fade-out
 ---
 transition: slide-up
 level: 2
-hideInToc: true
 ---
 
 # Meet John
@@ -90,150 +89,304 @@ Overall, the core message and sequence of events remains the same as the origina
 ---
 transition: slide-up
 level: 2
-hideInToc: true
 ---
 
 # What is D3.js?
 ##
 
-D3.js is a JavaScript library for manipulating documents based on data. It uses HTML, CSS, and SVG to create interactive data visualizations that update automatically when your data changes. With over 100 built-in charts and maps, D3.js is a popular choice for building dynamic dashboards, reports, and data exploration tools.
+- D3.js is a JavaScript library for manipulating documents based on data
+- Allows you to bind data to a Document Object Model (DOM), and then apply transformations to the document
+- Uses web standards: HTML, SVG and CSS
+- Open source, maintained by Mike Bostock
 
 ---
 transition: slide-up
 level: 2
-hideInToc: true
 ---
 
 # Compare D3.js to other chart libraries
 ##
 
-| Library | Highcharts.js | D3.js | Vega | Vega Lite|
-|:-:|:-:|:-:|:-:|:-:|
-| Pros | Easy to use<br>Many chart types<br>Good documentation<br>Simple styling<br>Commercial support | Customizable<br>Handles big data<br>Open source<br>Smooth animations<br> Free| Declarative<br>Efficient with big data<br>Open source <br>Embeddable<br>Enables interaction|Easier to learn than Vega <br>Also handles big data <br>Open source<br>Good documentation   |
-| Cons | Limited customization<br>Inefficient for big data<br>Paid license for commercial use|Steep learning curve<br>Coding-intensive<br>No default styling |   Steep learning curve<br>Abstracted from HTML<br>Limited docs/support|Less flexible than Vega<br>Still requires Vega knowledge<br>Limited styling|
+<table>
+  <tr>
+    <th></th>
+    <th>D3.js</th>
+    <th>Highcharts</th>
+    <th>Vega</th>
+    <th>Vega Lite</th>
+  </tr>
+  <tr>
+    <td>Type</td>
+    <td>Library</td>
+    <td>Charting library</td>
+    <td>Visualization grammar</td>
+    <td>High-level visualization grammar</td>
+  </tr>
+  <tr>
+    <td>Language</td>
+    <td>JavaScript</td>
+    <td>JavaScript</td>
+    <td>JSON</td>
+    <td>JSON</td>
+  </tr>
+  <tr>
+    <td>Learning curve</td>
+    <td>Steep</td>
+    <td>Low</td>
+    <td>Moderate</td>
+    <td>Low</td>
+  </tr>
+   <tr>
+    <td>Customization</td>
+    <td>High</td>
+    <td>Medium</td>
+    <td>High</td>
+    <td>Low</td>
+  </tr>
+  <tr>
+    <td>Main purpose</td>
+    <td>DOM manipulation for visualization</td>
+    <td>Interactive charts and plots</td>
+    <td>Create custom visualizations </td>
+    <td>Rapid visualization creation</td>
+  </tr>
+</table>
+
+---
+transition: slide-up
+level: 2
+---
+
+# Compare D3.js to other chart libraries
+##
+
+Some key differences:
+- D3.js has a steep learning curve as a low-level library, while the others are higher level (especially Vega Lite)
+- D3.js and Vega offer high customization, while Highcharts and Vega Lite are more limited
+- Highcharts is focused specifically on charting, while D3.js and Vega are more general purpose
+- Vega and Vega Lite use a JSON grammar, while D3.js and Highcharts use JavaScript
+- D3.js manipulates the DOM directly, while the others have abstraction layers
+Overall, the choice depends on your needs for customization vs. ease of use, purpose of visualization, and tech stack. Let me know if you would like me to clarify or expand the table further. I aimed for a high-level comparison, but can add more nuanced detail if needed.
 
 ---
 layout: section
 transition: fade-out
 ---
 
-# Basic selection and manipulation
+# Basic concepts
 
 ---
 transition: slide-up
 level: 2
-hideInToc: true
 ---
-# Selection
+# Selections
 ##
 
-- **d3.select()** - Selects the first element that matches the selector
-- **d3.selectAll()** - Selects all elements that match the selector
-- selection.select() - Selects descendants of the current selection 
-- selection.selectAll() - Selects all descendants of the current selection
-- selection.filter() - Filters the selection to only keep elements that match the selector
-- selection.data() - Binds data to the selected elements  
+- The basic unit of interaction in D3.js. Allows you to query and traverse the DOM.
+- Made up of one or more DOM nodes
+- Created using d3.select() and d3.selectAll()
+- Can be aggregated into larger selections
+- Select elements with selectors (div, #id, .class, etc.)
+- Call .select() and .selectAll()
+- Append, set attributes, call methods, add events, chain operations
 
 ---
 transition: slide-up
 level: 2
-hideInToc: true
 ---
-# Manipulation
-## 
-
-- **selection.append()** - Appends a new element to each selected node
-- selection.insert() - Inserts a new element before each selected node   
-- selection.html() - Sets the inner HTML of each selected node
-- **selection.attr()** - Sets the given attribute on each selected node
-- **selection.style()** - Sets the given style property on each selected node 
-- selection.on() - Attaches an event listener to each selected node
-- selection.remove() - Removes each selected node
-- selection.sort() - Sorts the selected nodes stably
-- selection.raise() - Re-inserts each selected node as the last child of its parent 
-- selection.lower() - Re-inserts each selected node as the first child of its parent
-
----
-transition: slide-up
-level: 2
-hideInToc: true
----
-# Select and Append flow
+# Scales
 ##
 
-Here is the flow of operations when D3 selects and appends an element:
-1. Use `d3.select()` to find an element:
-
-```js
-d3.select("#container")
-```
-
-This uses `document.querySelector()` to find the element with id="container"
-
-2. Call `.append()` on the selection to append a new element:
-
-```js
-d3.select("#container").append("p")
-```
-
-This uses `element.appendChild(document.createElement("p"))` to:
-- Create a new `<p>` element with `document.createElement("p")`.
-- Append it as a child of `#container` with `appendChild()`.
+- Map a dimension of data to a visual representation
+- For example, a linear scale could map [0, 100] to [0, 500]
+- Used to determine positioning, size and spacing of elements
+- Many scale types:
+  - Linear: Continuous, numeric domain and range
+  - Ordinal: Discrete domain, range of colors or symbols
+  - Time: Continuous time domain, numeric range
+  - Quantize: Continuous numeric domain, discrete range
+  - Threshold: maps continuous domain to discrete range of two values
+- Define a scale with .scaleType()
+  - Set domain and range
+  - Nice() to extend domain to round numbers
+  - Use scale() to get a scaled value
 
 ---
 transition: slide-up
 level: 2
-hideInToc: true
 ---
-# Select and Append flow
+
+# Axes
 ##
+- Uses scales to plot data representations along dimensions
+- Automates the generation of axes for our data
+- Call .axisBottom(), .axisLeft() etc. and pass in a scale
+- Set:
+  - ticks: Number/spacing of tick marks and labels
+  - tickFormat: Format of tick labels
+  - tickSize: Length of tick marks
+- Control label positions, prefix, suffix and format
+- Add the axis to your SVG with a g element and transform
 
-3. The new `<p>` element is now part of the selection and can be manipulated:
+---
+transition: slide-up
+level: 2
+---
+# Transitions
+Transitions animate and interpolate between states in D3.js visualizations.
 
-```js 
-d3.select("#container")
-  .append("p")
-  .text("Hello")   // Sets text content with element.textContent
-  .style("color", "blue") // Sets style with element.style.color 
-```
+**Why use transitions?**
+- Create engaging data visualizations
+- Help the viewer understand changes between states
+- Guide the viewer's attention to important changes
 
-4. We can traverse to the parent or children of the selection:
+**How do they work?**
+- D3 interpolates values and styles over the duration of the transition
+- During a transition, D3 will calculate the state between the starting and ending values
+  - For numeric values, it calculates the range between start and end
+  - For colors, it interpolates RGB values
+  - For positions, it calculates the intermediate x and y coordinates
+- This gives the smooth animated transition effect
 
+---
+transition: slide-up
+level: 2
+---
+# Transitions
+Transitions animate and interpolate between states in D3.js visualizations.
+
+**Adding a transition**
+To a selection, call .transition() and chain a duration()method:
 ```js
-const parent = d3.select("#container").select("p").parent() 
-// Uses element.parentElement to select #container parent
-
-const children = parent.children()
-// Uses element.children to select #container descendants, including the <p>
+selection
+  .transition()
+  .duration(500) // Transition lasts 500ms
+  .attr("width", 200) // End value
 ```
 
-5. D3 returns a new selection at each step, allowing us to chain multiple methods:
+This will animate the width of elements in the selection from their current width to 200px over 500ms.
 
+---
+transition: slide-up
+level: 2
+---
+# Transitions
+Transitions animate and interpolate between states in D3.js visualizations.
+
+**Other methods**
+- delay() - Delay transition start
+- ease() - Set easing function for different effects (bounce, elastic, etc.)
+- Can call same methods as on regular selections:
+  - attr() - Animate attribute changes
+  - style() - Animate style changes
+  - text() - Transition text content
+  - remove() - Transition elements out of the document
+
+---
+transition: slide-up
+level: 2
+---
+# Transitions
+Transitions animate and interpolate between states in D3.js visualizations.
+
+**Common uses**
+- Change bar heights on updating data
+- Zoom in/out of a map or scatterplot
+- Fade elements in/out
+- Move elements positions
+- And much more! Transitions greatly enhance data visualizations.
+
+---
+transition: slide-up
+level: 2
+---
+# Data Binding
+Data binding links input data to elements in the document.
+
+**Why data binding?**
+- Dynamically create elements based on data
+- Update, remove or modify elements based on updated data
+- The foundation for interactive, data-driven visualizations in D3
+
+**How does it work?**
+- Use .data() to bind data to a selection of elements
+- There are three selections made:
+  - Update selection: Existing elements with bound data
+  - Enter selection: New elements bound to new data
+  - Exit selection: Existing elements with no bound data
+- Apply operations to each selection independently
+
+---
+transition: slide-up
+level: 2
+---
+# Data Binding
+Data binding links input data to elements in the document.
+
+**Update selection**
 ```js
-d3.select("#container")
-  .append("p")
-  .text("Hello")
-  .style("color", "blue") 
-  .on("click", () => {...}) // Attaches an event with element.addEventListener()
+selection
+  .data(data)  // Binds data to selection
+  .text(d => d.value)  // Updates text content to match bound data
 ```
+
+**Enter selection**
+To append new elements for data not bound to an element yet:
+```js
+selection
+  .data(data)
+  .enter()    // Selects enter selection
+  .append("div")   // Append div for each enter selection
+  .text(d => d.value) // Set text content with bound data
+```
+
+---
+transition: slide-up
+level: 2
+---
+# Data Binding
+Data binding links input data to elements in the document.
+
+**Exit selection**
+To remove elements no longer bound to data:
+```js
+selection
+  .data(data)
+  .exit()     // Selects exit selection
+  .remove()   // Remove exit selection
+```
+
+**Key functions**
+For stable data bindings, define a key function to uniquely identify elements:
+```js
+selection
+  .data(data, d => d.id)   // d.id is the key function
+  // ...
+```
+
+---
+transition: slide-up
+level: 2
+---
+# Data Binding
+Data binding links input data to elements in the document.
+
+**Chaining**
+Selections can be chained so you can bind data, update, add enter selections and remove exit selections sequentially.
 
 ---
 layout: section
 level: 2
-hideInToc: true
+transition: fade-out
 ---
 
 # Demo 1
-## Basic selection and manipulation
+## Basic Concept
 
 
 ---
 layout: section
----
-# The Basic Shape
-
----
-layout: section
+transition: fade-out
 ---
 # Creating bar chart using D3.js
 
