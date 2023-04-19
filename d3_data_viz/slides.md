@@ -3,9 +3,10 @@
 theme: seriph
 # random image from a curated Unsplash collection by Anthony
 # like them? see https://unsplash.com/collections/94734566/slidev
-background: https://source.unsplash.com/collection/94734566/1920x1080
+# background: https://source.unsplash.com/collection/94734566/1920x1080
+background: https://w.wallhaven.cc/full/7p/wallhaven-7p12xv.jpg
 # apply any windi css classes to the current slide
-class: 'text-center'
+class: 'text-center text-white'
 # https://sli.dev/custom/highlighters.html
 highlighter: shiki
 # show line numbers in code blocks
@@ -23,13 +24,14 @@ drawings:
 transition: slide-left
 # use UnoCSS
 css: unocss
+# Hide in Table of Content
+hideInToc: true
 ---
 
-# Welcome to Slidev
+# Basic Data Visualization with D3.js
+*Visualize data dynamically*
 
-Presentation slides for developers
-
-<div class="pt-12">
+<!-- <div class="pt-12">
   <span @click="$slidev.nav.next" class="px-2 py-1 rounded cursor-pointer" hover="bg-white bg-opacity-10">
     Press Space for next page <carbon:arrow-right class="inline"/>
   </span>
@@ -43,96 +45,201 @@ Presentation slides for developers
     class="text-xl slidev-icon-btn opacity-50 !border-none !hover:text-white">
     <carbon-logo-github />
   </a>
-</div>
+</div> -->
 
 <!--
 The last comment block of each slide will be treated as slide notes. It will be visible and editable in Presenter Mode along with the slide. [Read more in the docs](https://sli.dev/guide/syntax.html#notes)
 -->
 
 ---
-transition: fade-out
----
-
-# What is Slidev?
-
-Slidev is a slides maker and presenter designed for developers, consist of the following features
-
-- 📝 **Text-based** - focus on the content with Markdown, and then style them later
-- 🎨 **Themable** - theme can be shared and used with npm packages
-- 🧑‍💻 **Developer Friendly** - code highlighting, live coding with autocompletion
-- 🤹 **Interactive** - embedding Vue components to enhance your expressions
-- 🎥 **Recording** - built-in recording and camera view
-- 📤 **Portable** - export into PDF, PNGs, or even a hostable SPA
-- 🛠 **Hackable** - anything possible on a webpage
-
-<br>
-<br>
-
-Read more about [Why Slidev?](https://sli.dev/guide/why)
-
-<!--
-You can have `style` tag in markdown to override the style for the current page.
-Learn more: https://sli.dev/guide/syntax#embedded-styles
--->
-
-<style>
-h1 {
-  background-color: #2B90B6;
-  background-image: linear-gradient(45deg, #4EC5D4 10%, #146b8c 20%);
-  background-size: 100%;
-  -webkit-background-clip: text;
-  -moz-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  -moz-text-fill-color: transparent;
-}
-</style>
-
-<!--
-Here is another comment.
--->
-
----
 layout: default
+hideInToc: true
+transition: fade-out
 ---
 
 # Table of contents
 
-```
-<Toc minDepth="1" maxDepth="5"></Toc>
-```
-
 <Toc></Toc>
 
 ---
+layout: section
+transition: fade-out
+---
+
+# Introduction
+
+---
 transition: slide-up
-
 level: 2
+hideInToc: true
 ---
 
-# Navigation
+# Meet John
+##
 
-Hover on the bottom-left corner to see the navigation's controls panel, [learn more](https://sli.dev/guide/navigation.html)
+John had CSV data tracking key metrics for his company that he wanted to visualize. Simply sharing the raw data wouldn't convey the insights effectively. He needed an interactive visualization solution.
 
-### Keyboard Shortcuts
+John found D3.js, a JavaScript library to bind data to HTML/SVG and create visualizations. Using D3.js, John built line charts, bar charts and pie charts to represent his data.
 
-|     |     |
-| --- | --- |
-| <kbd>right</kbd> / <kbd>space</kbd>| next animation or slide |
-| <kbd>left</kbd>  / <kbd>shift</kbd><kbd>space</kbd> | previous animation or slide |
-| <kbd>up</kbd> | previous slide |
-| <kbd>down</kbd> | next slide |
+John loaded his data into D3.js and created his first visualization in a few lines of code. He built more visualizations and dashboards, bringing his data to life with responsive and animated charts.
 
-<!-- https://sli.dev/guide/animations.html#click-animations -->
-<img
-  v-click
-  class="absolute -bottom-9 -left-7 w-80 opacity-50"
-  src="https://sli.dev/assets/arrow-bottom-left.svg"
-/>
-<p v-after class="absolute bottom-23 left-45 opacity-30 transform -rotate-10">Here!</p>
+Stakeholders seeing John's dashboards instantly grasped insights that were hard to see in the CSVs. John's project succeeded, and he plans to use D3.js again. D3.js proved a simple yet powerful tool to gain valuable insights into complex data.
+
+Overall, the core message and sequence of events remains the same as the original story, just in a more concise summarization.
 
 ---
-layout: image-right
+transition: slide-up
+level: 2
+hideInToc: true
+---
+
+# What is D3.js?
+##
+
+D3.js is a JavaScript library for manipulating documents based on data. It uses HTML, CSS, and SVG to create interactive data visualizations that update automatically when your data changes. With over 100 built-in charts and maps, D3.js is a popular choice for building dynamic dashboards, reports, and data exploration tools.
+
+---
+transition: slide-up
+level: 2
+hideInToc: true
+---
+
+# Compare D3.js to other chart libraries
+##
+
+| Library | Highcharts.js | D3.js | Vega | Vega Lite|
+|:-:|:-:|:-:|:-:|:-:|
+| Pros | Easy to use<br>Many chart types<br>Good documentation<br>Simple styling<br>Commercial support | Customizable<br>Handles big data<br>Open source<br>Smooth animations<br> Free| Declarative<br>Efficient with big data<br>Open source <br>Embeddable<br>Enables interaction|Easier to learn than Vega <br>Also handles big data <br>Open source<br>Good documentation   |
+| Cons | Limited customization<br>Inefficient for big data<br>Paid license for commercial use|Steep learning curve<br>Coding-intensive<br>No default styling |   Steep learning curve<br>Abstracted from HTML<br>Limited docs/support|Less flexible than Vega<br>Still requires Vega knowledge<br>Limited styling|
+
+---
+layout: section
+transition: fade-out
+---
+
+# Basic selection and manipulation
+
+---
+transition: slide-up
+level: 2
+hideInToc: true
+---
+# Selection
+##
+
+- **d3.select()** - Selects the first element that matches the selector
+- **d3.selectAll()** - Selects all elements that match the selector
+- selection.select() - Selects descendants of the current selection 
+- selection.selectAll() - Selects all descendants of the current selection
+- selection.filter() - Filters the selection to only keep elements that match the selector
+- selection.data() - Binds data to the selected elements  
+
+---
+transition: slide-up
+level: 2
+hideInToc: true
+---
+# Manipulation
+## 
+
+- **selection.append()** - Appends a new element to each selected node
+- selection.insert() - Inserts a new element before each selected node   
+- selection.html() - Sets the inner HTML of each selected node
+- **selection.attr()** - Sets the given attribute on each selected node
+- **selection.style()** - Sets the given style property on each selected node 
+- selection.on() - Attaches an event listener to each selected node
+- selection.remove() - Removes each selected node
+- selection.sort() - Sorts the selected nodes stably
+- selection.raise() - Re-inserts each selected node as the last child of its parent 
+- selection.lower() - Re-inserts each selected node as the first child of its parent
+
+---
+transition: slide-up
+level: 2
+hideInToc: true
+---
+# Select and Append flow
+##
+
+Here is the flow of operations when D3 selects and appends an element:
+1. Use `d3.select()` to find an element:
+
+```js
+d3.select("#container")
+```
+
+This uses `document.querySelector()` to find the element with id="container"
+
+2. Call `.append()` on the selection to append a new element:
+
+```js
+d3.select("#container").append("p")
+```
+
+This uses `element.appendChild(document.createElement("p"))` to:
+- Create a new `<p>` element with `document.createElement("p")`.
+- Append it as a child of `#container` with `appendChild()`.
+
+---
+transition: slide-up
+level: 2
+hideInToc: true
+---
+# Select and Append flow
+##
+
+3. The new `<p>` element is now part of the selection and can be manipulated:
+
+```js 
+d3.select("#container")
+  .append("p")
+  .text("Hello")   // Sets text content with element.textContent
+  .style("color", "blue") // Sets style with element.style.color 
+```
+
+4. We can traverse to the parent or children of the selection:
+
+```js
+const parent = d3.select("#container").select("p").parent() 
+// Uses element.parentElement to select #container parent
+
+const children = parent.children()
+// Uses element.children to select #container descendants, including the <p>
+```
+
+5. D3 returns a new selection at each step, allowing us to chain multiple methods:
+
+```js
+d3.select("#container")
+  .append("p")
+  .text("Hello")
+  .style("color", "blue") 
+  .on("click", () => {...}) // Attaches an event with element.addEventListener()
+```
+
+---
+layout: section
+level: 2
+hideInToc: true
+---
+
+# Demo 1
+## Basic selection and manipulation
+
+
+---
+layout: section
+---
+# The Basic Shape
+
+---
+layout: section
+---
+# Creating bar chart using D3.js
+
+---
 image: https://source.unsplash.com/collection/94734566/1920x1080
+hideInToc: true
 ---
 
 # Code
@@ -171,278 +278,3 @@ function updateUser(id: number, update: User) {
 </style>
 
 ---
-
-# Components
-
-<div grid="~ cols-2 gap-4">
-<div>
-
-You can use Vue components directly inside your slides.
-
-We have provided a few built-in components like `<Tweet/>` and `<Youtube/>` that you can use directly. And adding your custom components is also super easy.
-
-```html
-<Counter :count="10" />
-```
-
-<!-- ./components/Counter.vue -->
-<Counter :count="10" m="t-4" />
-
-Check out [the guides](https://sli.dev/builtin/components.html) for more.
-
-</div>
-<div>
-
-```html
-<Tweet id="1390115482657726468" />
-```
-
-<Tweet id="1390115482657726468" scale="0.65" />
-
-</div>
-</div>
-
-<!--
-Presenter note with **bold**, *italic*, and ~~striked~~ text.
-
-Also, HTML elements are valid:
-<div class="flex w-full">
-  <span style="flex-grow: 1;">Left content</span>
-  <span>Right content</span>
-</div>
--->
-
-
----
-class: px-20
----
-
-# Themes
-
-Slidev comes with powerful theming support. Themes can provide styles, layouts, components, or even configurations for tools. Switching between themes by just **one edit** in your frontmatter:
-
-<div grid="~ cols-2 gap-2" m="-t-2">
-
-```yaml
----
-theme: default
----
-```
-
-```yaml
----
-theme: seriph
----
-```
-
-<img border="rounded" src="https://github.com/slidevjs/themes/blob/main/screenshots/theme-default/01.png?raw=true">
-
-<img border="rounded" src="https://github.com/slidevjs/themes/blob/main/screenshots/theme-seriph/01.png?raw=true">
-
-</div>
-
-Read more about [How to use a theme](https://sli.dev/themes/use.html) and
-check out the [Awesome Themes Gallery](https://sli.dev/themes/gallery.html).
-
----
-preload: false
----
-
-# Animations
-
-Animations are powered by [@vueuse/motion](https://motion.vueuse.org/).
-
-```html
-<div
-  v-motion
-  :initial="{ x: -80 }"
-  :enter="{ x: 0 }">
-  Slidev
-</div>
-```
-
-<div class="w-60 relative mt-6">
-  <div class="relative w-40 h-40">
-    <img
-      v-motion
-      :initial="{ x: 800, y: -100, scale: 1.5, rotate: -50 }"
-      :enter="final"
-      class="absolute top-0 left-0 right-0 bottom-0"
-      src="https://sli.dev/logo-square.png"
-    />
-    <img
-      v-motion
-      :initial="{ y: 500, x: -100, scale: 2 }"
-      :enter="final"
-      class="absolute top-0 left-0 right-0 bottom-0"
-      src="https://sli.dev/logo-circle.png"
-    />
-    <img
-      v-motion
-      :initial="{ x: 600, y: 400, scale: 2, rotate: 100 }"
-      :enter="final"
-      class="absolute top-0 left-0 right-0 bottom-0"
-      src="https://sli.dev/logo-triangle.png"
-    />
-  </div>
-
-  <div
-    class="text-5xl absolute top-14 left-40 text-[#2B90B6] -z-1"
-    v-motion
-    :initial="{ x: -80, opacity: 0}"
-    :enter="{ x: 0, opacity: 1, transition: { delay: 2000, duration: 1000 } }">
-    Slidev
-  </div>
-</div>
-
-<!-- vue script setup scripts can be directly used in markdown, and will only affects current page -->
-<script setup lang="ts">
-const final = {
-  x: 0,
-  y: 0,
-  rotate: 0,
-  scale: 1,
-  transition: {
-    type: 'spring',
-    damping: 10,
-    stiffness: 20,
-    mass: 2
-  }
-}
-</script>
-
-<div
-  v-motion
-  :initial="{ x:35, y: 40, opacity: 0}"
-  :enter="{ y: 0, opacity: 1, transition: { delay: 3500 } }">
-
-[Learn More](https://sli.dev/guide/animations.html#motion)
-
-</div>
-
----
-
-# LaTeX
-
-LaTeX is supported out-of-box powered by [KaTeX](https://katex.org/).
-
-<br>
-
-Inline $\sqrt{3x-1}+(1+x)^2$
-
-Block
-$$
-\begin{array}{c}
-
-\nabla \times \vec{\mathbf{B}} -\, \frac1c\, \frac{\partial\vec{\mathbf{E}}}{\partial t} &
-= \frac{4\pi}{c}\vec{\mathbf{j}}    \nabla \cdot \vec{\mathbf{E}} & = 4 \pi \rho \\
-
-\nabla \times \vec{\mathbf{E}}\, +\, \frac1c\, \frac{\partial\vec{\mathbf{B}}}{\partial t} & = \vec{\mathbf{0}} \\
-
-\nabla \cdot \vec{\mathbf{B}} & = 0
-
-\end{array}
-$$
-
-<br>
-
-[Learn more](https://sli.dev/guide/syntax#latex)
-
----
-
-# Diagrams
-
-You can create diagrams / graphs from textual descriptions, directly in your Markdown.
-
-<div class="grid grid-cols-3 gap-10 pt-4 -mb-6">
-
-```mermaid {scale: 0.5}
-sequenceDiagram
-    Alice->John: Hello John, how are you?
-    Note over Alice,John: A typical interaction
-```
-
-```mermaid {theme: 'neutral', scale: 0.8}
-graph TD
-B[Text] --> C{Decision}
-C -->|One| D[Result 1]
-C -->|Two| E[Result 2]
-```
-
-```mermaid
-mindmap
-  root((mindmap))
-    Origins
-      Long history
-      ::icon(fa fa-book)
-      Popularisation
-        British popular psychology author Tony Buzan
-    Research
-      On effectivness<br/>and features
-      On Automatic creation
-        Uses
-            Creative techniques
-            Strategic planning
-            Argument mapping
-    Tools
-      Pen and paper
-      Mermaid
-```
-
-```plantuml {scale: 0.7}
-@startuml
-
-package "Some Group" {
-  HTTP - [First Component]
-  [Another Component]
-}
-
-node "Other Groups" {
-  FTP - [Second Component]
-  [First Component] --> FTP
-}
-
-cloud {
-  [Example 1]
-}
-
-
-database "MySql" {
-  folder "This is my folder" {
-    [Folder 3]
-  }
-  frame "Foo" {
-    [Frame 4]
-  }
-}
-
-
-[Another Component] --> [Example 1]
-[Example 1] --> [Folder 3]
-[Folder 3] --> [Frame 4]
-
-@enduml
-```
-
-</div>
-
-[Learn More](https://sli.dev/guide/syntax.html#diagrams)
-
----
-src: ./pages/multiple-entries.md
-hide: false
----
-
----
-layout: center
-class: text-center
----
-
-# Learn More
-
-[Documentations](https://sli.dev) · [GitHub](https://github.com/slidevjs/slidev) · [Showcases](https://sli.dev/showcases.html)
-
----
-layout: end
----
-
