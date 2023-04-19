@@ -35,7 +35,7 @@ hideInToc: true
   <span @click="$slidev.nav.next" class="px-2 py-1 rounded cursor-pointer" hover="bg-white bg-opacity-10">
     Press Space for next page <carbon:arrow-right class="inline"/>
   </span>
-</div>
+</div> -->
 
 <div class="abs-br m-6 flex gap-2">
   <button @click="$slidev.nav.openInEditor()" title="Open in Editor" class="text-xl slidev-icon-btn opacity-50 !border-none !hover:text-white">
@@ -45,7 +45,7 @@ hideInToc: true
     class="text-xl slidev-icon-btn opacity-50 !border-none !hover:text-white">
     <carbon-logo-github />
   </a>
-</div> -->
+</div>
 
 <!--
 The last comment block of each slide will be treated as slide notes. It will be visible and editable in Presenter Mode along with the slide. [Read more in the docs](https://sli.dev/guide/syntax.html#notes)
@@ -269,38 +269,140 @@ transition: slide-up
 level: 2
 ---
 # Scales
-##
+Scales map a dimension of data to a visual representation. They are a core part of D3.js.
 
-- Map a dimension of data to a visual representation
-- For example, a linear scale could map [0, 100] to [0, 500]
-- Used to determine positioning, size and spacing of elements
-- Many scale types:
-  - Linear: Continuous, numeric domain and range
-  - Ordinal: Discrete domain, range of colors or symbols
-  - Time: Continuous time domain, numeric range
-  - Quantize: Continuous numeric domain, discrete range
-  - Threshold: maps continuous domain to discrete range of two values
-- Define a scale with .scaleType()
-  - Set domain and range
-  - Nice() to extend domain to round numbers
-  - Use scale() to get a scaled value
+**Why use scales?**
+- Map a continuous input domain (data) to a continuous or discrete output range (visual)
+- Make visual encodings of data easier by handling interpolation and normalization
+- Many types for different types of data (linear, ordinal, time, quantize, etc.)
 
 ---
 transition: slide-up
 level: 2
 ---
+# Scales
+Scales map a dimension of data to a visual representation. They are a core part of D3.js.
 
+**Creating a scale**
+- Use .scaleLinear() for a continuous linear scale:
+```js
+let scale = d3.scaleLinear()
+             .domain([0, 100])     // Data domain
+             .range([0, 500])      // Visual range
+```
+
+- Use .scaleOrdinal() for a discrete ordinal scale:
+```js
+let scale = d3.scaleOrdinal()
+             .domain(["a", "b", "c"])
+             .range(["red", "blue", "green"])
+```
+- Other scale types: time scale for dates, quantize scale for quantizing a continuous range into discrete values, threshold scale for a two-color range, etc.
+
+---
+transition: slide-up
+level: 2
+---
+# Scales
+Scales map a dimension of data to a visual representation. They are a core part of D3.js.
+
+**Scale functions**
+- scale(x) - Get corresponding y value for x
+- For example:
+
+```js
+scale(25)     // Returns 250
+scale("b")   // Returns "blue"
+```
+- invert(y) - Get x value for corresponding y value
+- domain() - Get or set input domain
+- range() - Get or set output range
+- ticks() - Get tick values for axis
+- tickFormat() - Format ticks appropriately (currency, percentage, time, etc.)
+
+---
+transition: slide-up
+level: 2
+---
+# Scales
+Scales map a dimension of data to a visual representation. They are a core part of D3.js.
+
+**Uses of scales**
+- Position and size elements based on data
+- Color elements
+- Create axes to map positions visually
+- Encode other visual properties like opacity, font size, etc.
+
+---
+transition: slide-up
+level: 2
+---
 # Axes
-##
-- Uses scales to plot data representations along dimensions
-- Automates the generation of axes for our data
-- Call .axisBottom(), .axisLeft() etc. and pass in a scale
-- Set:
-  - ticks: Number/spacing of tick marks and labels
-  - tickFormat: Format of tick labels
-  - tickSize: Length of tick marks
-- Control label positions, prefix, suffix and format
-- Add the axis to your SVG with a g element and transform
+Axes are visual representations of scales. They provide reference marks for values along a scale's domain.
+
+**Why use axes?**
+- Give viewers a reference to position, value, and units along a dimension
+- Automate the generation of axes based on scales
+- Control axis appearance by setting properties
+
+
+---
+transition: slide-up
+level: 2
+---
+# Axes
+Axes are visual representations of scales. They provide reference marks for values along a scale's domain.
+
+**Creating an axis**
+- Call .axisBottom() (or .axisTop(), .axisLeft(), .axisRight()) and pass in a scale:
+
+```js
+let scale = d3.scaleLinear()
+             .domain([0, 100])
+             .range([0, 500]);
+
+let axis = d3.axisBottom(scale);
+```
+
+---
+transition: slide-up
+level: 2
+---
+# Axes
+Axes are visual representations of scales. They provide reference marks for values along a scale's domain.
+
+**Appending the axis to the DOM**
+- Create a g (group) element
+- Apply a transform to position the axis
+- Append the g to your SVG or grouping element
+
+```js
+svg.append("g")
+   .attr("transform", "translate(0,500)")
+   .call(axis);
+```
+
+---
+transition: slide-up
+level: 2
+---
+# Axes
+Axes are visual representations of scales. They provide reference marks for values along a scale's domain.
+
+**Axis properties**
+Some properties to customize your axis:
+- ticks: Number of ticks (and labels)
+- tickSize: Length of ticks
+- tickPadding: Padding between tick and label
+- tickFormat: Format tick labels ($, %, time, SI prefix, etc.)
+- orient: Orientation (top, bottom, left, right)
+- tickValues: Specific tick values to use instead of D3's default
+** Uses of axes **
+- x-axis along the bottom of a chart
+- y-axis along the left side of a chart
+- Color bar axes
+- Size axes
+- And more! Any visual encoding of data along a dimension.
 
 ---
 transition: slide-up
