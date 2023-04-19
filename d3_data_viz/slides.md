@@ -179,6 +179,20 @@ transition: fade-out
 transition: slide-up
 level: 2
 ---
+# Basic Concepts
+The core concepts to create charts using D3.js
+
+There are some core concepts we need to know before creating our first chart using D3.js:
+- Selections
+- Scales
+- Axes
+- Transitions
+- Data Binding
+
+---
+transition: slide-up
+level: 2
+---
 # Selections
 Selections are the basic unit of interaction in D3.js. They allow you to query and traverse the DOM.
 
@@ -416,6 +430,13 @@ Transitions animate and interpolate between states in D3.js visualizations.
 - Help the viewer understand changes between states
 - Guide the viewer's attention to important changes
 
+---
+transition: slide-up
+level: 2
+---
+# Transitions
+Transitions animate and interpolate between states in D3.js visualizations.
+
 **How do they work?**
 - D3 interpolates values and styles over the duration of the transition
 - During a transition, D3 will calculate the state between the starting and ending values
@@ -483,6 +504,13 @@ Data binding links input data to elements in the document.
 - Dynamically create elements based on data
 - Update, remove or modify elements based on updated data
 - The foundation for interactive, data-driven visualizations in D3
+
+---
+transition: slide-up
+level: 2
+---
+# Data Binding
+Data binding links input data to elements in the document.
 
 **How does it work?**
 - Use .data() to bind data to a selection of elements
