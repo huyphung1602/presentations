@@ -3,8 +3,7 @@
 theme: seriph
 # random image from a curated Unsplash collection by Anthony
 # like them? see https://unsplash.com/collections/94734566/slidev
-# background: https://source.unsplash.com/collection/94734566/1920x1080
-background: https://w.wallhaven.cc/full/7p/wallhaven-7p12xv.jpg
+background: https://source.unsplash.com/collection/94734566/1920x1080
 # apply any windi css classes to the current slide
 class: 'text-center text-white'
 # https://sli.dev/custom/highlighters.html
@@ -41,9 +40,9 @@ hideInToc: true
   <button @click="$slidev.nav.openInEditor()" title="Open in Editor" class="text-xl slidev-icon-btn opacity-50 !border-none !hover:text-white">
     <carbon:edit />
   </button>
-  <a href="https://github.com/slidevjs/slidev" target="_blank" alt="GitHub"
+  <a href="http://localhost:3030/presenter" target="_blank" alt="GitHub"
     class="text-xl slidev-icon-btn opacity-50 !border-none !hover:text-white">
-    <carbon-logo-github />
+    <carbon:presentation-file />
   </a>
 </div>
 
