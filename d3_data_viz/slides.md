@@ -586,7 +586,6 @@ transition: fade-out
 # Demo 1
 ## Basic Concepts
 
-
 ---
 layout: section
 transition: fade-out
@@ -600,6 +599,14 @@ layout: image
 image: ./images/the_d3_data_flow.svg
 ---
 # The d3 data flow
+
+---
+transition: slide-up
+level: 2
+layout: image
+image: ./images/1_find.svg
+---
+# Find the data
 
 ---
 transition: slide-up
@@ -641,6 +648,14 @@ In this talk, we'll use the tabluar data from CSV file.
 ---
 transition: slide-up
 level: 2
+layout: image
+image: ./images/2_load.svg
+---
+# Load the data
+
+---
+transition: slide-up
+level: 2
 ---
 # Load the data
 ##
@@ -652,6 +667,14 @@ d3.csv('src/data/1.csv', d => {
   console.log(d);
 });
 ```
+
+---
+transition: slide-up
+level: 2
+layout: image
+image: ./images/3a_format.svg
+---
+# Format the data
 
 ---
 transition: slide-up
@@ -677,6 +700,14 @@ d3.csv('src/data/1.csv', d => {
 ---
 transition: slide-up
 level: 2
+layout: image
+image: ./images/3b_measure.svg
+---
+# Measure the data
+
+---
+transition: slide-up
+level: 2
 ---
 # Measure the Data
 ##
@@ -698,6 +729,14 @@ d3.csv('src/data/1.csv', d => {
   console.log(data); // => [20, 1078]
 });
 ```
+
+---
+transition: slide-up
+level: 2
+layout: image
+image: ./images/4_bind.svg
+---
+# Bind the data to DOM elements
 
 ---
 transition: slide-up
@@ -752,7 +791,7 @@ level: 2
 ---
 # Bind the data to DOM elements
 
-```js {8|12-18|20-23|20-29|19-29} {maxHeight:'400px'}
+```js {8|12-18|20-23|19-29|30|all} {maxHeight:'400px'}
 d3.csv('src/data/1.csv', d => {
   return {
     technology: d.technology,
@@ -781,7 +820,8 @@ function createViz(data) {
       .attr("height", barHeight)
       .attr("x", 0)
       .attr("y", (d, i) => (barHeight + 5) * i)
-      .attr("fill", "skyblue");
+      .attr("fill", "skyblue")
+      .attr("fill", d => d.technology === "D3.js" ? "yellowgreen" : "skyblue");
 }
 ```
 
@@ -789,8 +829,17 @@ function createViz(data) {
 transition: slide-up
 level: 2
 layout: image
-image: ./images/binding_rect_formula.png
+image: ./images/binding_rect_formula.svg
 ---
+# Bind the data to DOM elements
+
+---
+transition: slide-up
+level: 2
+layout: image
+image: ./images/5_scale.svg
+---
+# Adapting the data for the screen
 
 ---
 transition: slide-up
@@ -800,6 +849,160 @@ level: 2
 ##
 
 When we create data visualizations, we translate the data into visual variables, like the size of an element, its color or its position on the screen. In D3 projects, this translation is handled with scales.
+
+Scales are functions that take a value from the data as an input, and return an output value that can directly be used to set the size, position or color of a data visualization element. More specifically, the input data is part of a domain, which is the spectrum of possible data values. On the screen, that domain is mapped onto a range, the spectrum of possible output values.
+
+---
+transition: slide-up
+level: 2
+---
+# Adapting the data for the screen 
+## Linear Scale
+
+Linear scales takes a continuous domain as an input and returns a continuous range of outputs. 
+
+```js
+const myScale = d3.scaleLinear()
+  .domain([0, 200])
+  .range([0, 20]);
+
+console.log(myScale(100));
+```
+
+---
+transition: slide-up
+level: 2
+---
+# Adapting the data for the screen 
+## Band Scale
+
+Band scales accept a discrete input and provide a continuous output and are especially useful for distributing the rectangles of a bar chart within the available space.
+
+```js {8-14}
+d3.csv('src/data/1.csv', d => {
+  return {
+    technology: d.technology,
+    count: +d.count,
+  }; 
+}).then(data => {
+  data.sort((a, b) => b.count - a.count);
+  const yScale = d3.scaleBand()
+    .domain(data.map(d => d.technology))
+    .range([0, 700]);
+
+  console.log(data);
+  console.log(yScale("Excel"));
+  console.log(yScale("D3.js"));
+});
+```
+
+---
+transition: slide-up
+level: 2
+---
+# Adapting the data for the screen
+##
+Apply the scale to our visualization
+
+```js {1-14|17|26-28|29-32|34-38|40-63|65-71|all} {maxHeight: '400px'}
+d3.csv('src/data/1.csv', d => {
+  return {
+    technology: d.technology,
+    count: +d.count
+  };
+}).then(data => {
+  console.log(data.length); // => 33
+  console.log(d3.max(data, d => d.count)); // => 1078
+  console.log(d3.min(data, d => d.count)); // => 20
+  console.log(d3.extent(data, d => d.count)); // => [20, 1078]
+ 
+  data.sort((a, b) => b.count - a.count);
+ 
+  createViz(data);
+});
+
+const createViz = (myData) => {
+  const svgWidth = 600;
+  const svgHeight = 700;
+  const selection = d3
+    .select('.d3-content');
+  const svg = selection
+    .append('svg')
+    .attr('viewBox', `0 0 ${svgWidth} ${svgHeight}`);
+  const defaultColor = '#39B5E0';
+  const xScale = d3.scaleLinear()
+    .domain(d3.extent(myData, d => d.count))
+    .range([0, 450]);
+  const yScale = d3.scaleBand()
+    .domain(myData.map(d => d.technology))
+    .range([0, svgHeight])
+    .paddingInner(0.2);
+
+  const barAndLabel = svg
+    .selectAll('g')
+      .data(myData)
+      .join('g')
+      .attr('transform', d => `translate(0, ${yScale(d.technology)})`);
+
+  barAndLabel
+    .append("rect")
+      .attr("width", d => xScale(d.count))
+      .attr("height", yScale.bandwidth())
+      .attr("x", 100)
+      .attr("y", 0)
+      .attr("fill", d => d.technology === 'D3.js' ? 'yellowgreen': defaultColor);
+
+  barAndLabel
+    .append('text')
+      .text(d => d.technology)
+      .attr('x', 96)
+      .attr('y', 12)
+      .attr('text-anchor', 'end')
+      .style('font-family', 'sans-serif')
+      .style('font-size', '11px');
+
+  barAndLabel
+    .append('text')
+      .text(d => d.count)
+      .attr('x', d => 100 + xScale(d.count) + 4)
+      .attr('y', 12)
+      .style('font-family', 'sans-serif')
+      .style('font-size', '9px');
+
+  svg
+    .append('line')
+      .attr('x1', 100)
+      .attr('y1', 0)
+      .attr('x2', 100)
+      .attr('y2', svgHeight)
+      .attr('stroke', 'black');
+};
+```
+
+---
+layout: section
+level: 2
+transition: fade-out
+---
+
+# Demo 2
+## Working with data
+
+---
+layout: section
+transition: fade-out
+---
+
+# Q&A
+
+---
+layout: section
+level: 2
+transition: fade-out
+hideInToc: true
+---
+
+# Thank you for your listening
 
 <style>
 .footnotes-sep {
