@@ -195,7 +195,7 @@ level: 2
 # Selections
 Selections are the basic unit of interaction in D3.js. They allow you to query and traverse the DOM.
 
-**Making a selection**
+**Making a selection**:
 - Use d3.select() to select one element:
 ```js
 d3.select("div")  // Selects first div
@@ -232,7 +232,7 @@ level: 2
 # Selections
 Selections are the basic unit of interaction in D3.js. They allow you to query and traverse the DOM.
 
-**Selecting and chaining**
+**Selecting and chaining**:
 - Store selection in a variable to operate on later
 - Use method chaining to apply multiple operations to a selection sequentially:
 ```js
@@ -250,7 +250,7 @@ level: 2
 # Selections
 Selections are the basic unit of interaction in D3.js. They allow you to query and traverse the DOM.
 
-**Appending elements**
+**Appending elements**:
 - Use .append() to add an element to each node in the selection:
 ```js
 divSelection.append("p")   // Add <p> to each div
@@ -265,7 +265,7 @@ level: 2
 # Selections
 Selections are the basic unit of interaction in D3.js. They allow you to query and traverse the DOM.
 
-**Other selection methods**
+**Other selection methods**:
 - .attr() - Get or set attributes
 - .text() - Get or set text content
 - .html() - Get or set inner HTML
@@ -319,7 +319,7 @@ level: 2
 # Scales
 Scales map a dimension of data to a visual representation. They are a core part of D3.js.
 
-**Scale functions**
+**Scale functions**:
 - scale(x) - Get corresponding y value for x
 - For example:
 
@@ -340,7 +340,7 @@ level: 2
 # Scales
 Scales map a dimension of data to a visual representation. They are a core part of D3.js.
 
-**Uses of scales**
+**Uses of scales**:
 - Position and size elements based on data
 - Color elements
 - Create axes to map positions visually
@@ -366,7 +366,7 @@ level: 2
 # Axes
 Axes are visual representations of scales. They provide reference marks for values along a scale's domain.
 
-**Creating an axis**
+**Creating an axis**:
 - Call .axisBottom() (or .axisTop(), .axisLeft(), .axisRight()) and pass in a scale:
 
 ```js
@@ -384,7 +384,7 @@ level: 2
 # Axes
 Axes are visual representations of scales. They provide reference marks for values along a scale's domain.
 
-**Appending the axis to the DOM**
+**Appending the axis to the DOM**:
 - Create a g (group) element
 - Apply a transform to position the axis
 - Append the g to your SVG or grouping element
@@ -402,7 +402,7 @@ level: 2
 # Axes
 Axes are visual representations of scales. They provide reference marks for values along a scale's domain.
 
-**Axis properties**
+**Axis properties**:
 Some properties to customize your axis:
 - ticks: Number of ticks (and labels)
 - tickSize: Length of ticks
@@ -451,7 +451,7 @@ level: 2
 # Transitions
 Transitions animate and interpolate between states in D3.js visualizations.
 
-**Adding a transition**
+**Adding a transition**:
 To a selection, call .transition() and chain a duration()method:
 ```js
 selection
@@ -469,7 +469,7 @@ level: 2
 # Transitions
 Transitions animate and interpolate between states in D3.js visualizations.
 
-**Other methods**
+**Other methods**:
 - delay() - Delay transition start
 - ease() - Set easing function for different effects (bounce, elastic, etc.)
 - Can call same methods as on regular selections:
@@ -485,7 +485,7 @@ level: 2
 # Transitions
 Transitions animate and interpolate between states in D3.js visualizations.
 
-**Common uses**
+**Common uses**:
 - Change bar heights on updating data
 - Zoom in/out of a map or scatterplot
 - Fade elements in/out
@@ -526,14 +526,14 @@ level: 2
 # Data Binding
 Data binding links input data to elements in the document.
 
-**Update selection**
+**Update selection**:
 ```js
 selection
   .data(data)  // Binds data to selection
   .text(d => d.value)  // Updates text content to match bound data
 ```
 
-**Enter selection**
+**Enter selection**:
 To append new elements for data not bound to an element yet:
 ```js
 selection
@@ -550,7 +550,7 @@ level: 2
 # Data Binding
 Data binding links input data to elements in the document.
 
-**Exit selection**
+**Exit selection**:
 To remove elements no longer bound to data:
 ```js
 selection
@@ -559,7 +559,7 @@ selection
   .remove()   // Remove exit selection
 ```
 
-**Key functions**
+**Key functions**:
 For stable data bindings, define a key function to uniquely identify elements:
 ```js
 selection
@@ -574,7 +574,7 @@ level: 2
 # Data Binding
 Data binding links input data to elements in the document.
 
-**Chaining**
+**Chaining**:
 Selections can be chained so you can bind data, update, add enter selections and remove exit selections sequentially.
 
 ---
