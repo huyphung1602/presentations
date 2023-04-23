@@ -9,7 +9,7 @@ class: 'text-center text-white'
 # https://sli.dev/custom/highlighters.html
 highlighter: shiki
 # show line numbers in code blocks
-lineNumbers: false
+lineNumbers: true
 # some information about the slides, markdown enabled
 info: |
   ## Slidev Starter Template
@@ -689,10 +689,117 @@ d3.csv('src/data/1.csv', d => {
     technology: d.technology,
     count: +d.count,
   }; 
-}).then(d => {
-  console.log(d.length);
+}).then(data => {
+  console.log(data.length);
+  console.log(d3.max(data, d => d.count)); // => 1078
+  console.log(d3.min(data, d => d.count)); // => 20
+  console.log(d3.extent(data, d => d.count)); // => [20, 1078]
+  data.sort((a, b) => b.count - a.count);
+  console.log(data); // => [20, 1078]
 });
 ```
+
+---
+transition: slide-up
+level: 2
+---
+# Bind the data to DOM elements
+##
+
+We are now ready to introduce one of the most exciting features of D3: data-binding. With data-binding, we can couple objects from a dataset to DOM elements. For instance, each rectangle element in our bar graph will be coupled with a technology and its corresponding count value. At the data-binding step of the data workflow, the visualization really starts to come to life.
+
+To bind data, you only need to use the pattern shown in the next snippet and constituted of
+three methods (selectAll(), data() and join()) chained to a selection.
+
+```js
+selection
+ .selectAll("selector")
+ .data(myData)
+ .join("element to add");
+```
+
+---
+transition: slide-up
+level: 2
+---
+# Bind the data to DOM elements
+##
+
+Create the svg viewport
+
+```js
+const svgWidth = 600;
+const svgHeight = 700;
+const selection = d3
+  .select('.d3-content');
+const svg = selection
+  .append('svg')
+  .attr('viewBox', `0 0 ${svgWidth} ${svgHeight}`)
+  .style('background-color', 'greenyellow');
+```
+
+---
+transition: slide-up
+level: 2
+layout: image
+image: ./images/the_data_binding_process.svg
+---
+# Bind the data to DOM elements
+
+---
+transition: slide-up
+level: 2
+---
+# Bind the data to DOM elements
+
+```js {8|12-18|20-23|20-29|19-29} {maxHeight:'400px'}
+d3.csv('src/data/1.csv', d => {
+  return {
+    technology: d.technology,
+    count: +d.count,
+  }; 
+}).then(data => {
+  data.sort((a, b) => b.count - a.count);
+  createViz(data);
+});
+
+function createViz(data) {
+  const svgWidth = 600;
+  const svgHeight = 700;
+  const selection = d3
+    .select('.d3-content');
+  const svg = selection
+    .append('svg')
+    .attr('viewBox', `0 0 ${svgWidth} ${svgHeight}`)
+  const barHeight = 20;
+  svg
+    .selectAll('rect')
+    .data(data)
+    .join('rect')
+      .attr("class", _ => 'bar')
+      .attr("width", d => d.count)
+      .attr("height", barHeight)
+      .attr("x", 0)
+      .attr("y", (d, i) => (barHeight + 5) * i)
+      .attr("fill", "skyblue");
+}
+```
+
+---
+transition: slide-up
+level: 2
+layout: image
+image: ./images/binding_rect_formula.png
+---
+
+---
+transition: slide-up
+level: 2
+---
+# Adapting the data for the screen 
+##
+
+When we create data visualizations, we translate the data into visual variables, like the size of an element, its color or its position on the screen. In D3 projects, this translation is handled with scales.
 
 <style>
 .footnotes-sep {
@@ -705,5 +812,3 @@ d3.csv('src/data/1.csv', d => {
   display: none;
 }
 </style>
-
----
