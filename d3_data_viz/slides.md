@@ -591,35 +591,108 @@ transition: fade-out
 layout: section
 transition: fade-out
 ---
-# Creating bar chart using D3.js
+# Working with Data
 
 ---
-image: https://source.unsplash.com/collection/94734566/1920x1080
-hideInToc: true
+transition: slide-up
+level: 2
+layout: image
+image: ./images/the_d3_data_flow.svg
+---
+# The d3 data flow
+
+---
+transition: slide-up
+level: 2
+---
+# Find the data
+Data Types
+
+When building data visualizations, we work with two main data types: quantitative and qualitative. Quantitative data is numerical information like time, weight, or countries' GDP. Quantitative data can be discrete or continuous.
+
+Discrete data consists of whole numbers, also called integers, that cannot be subdivided.
+
+Qualitative data is made of non-numerical information like text. It can be nominal or ordinal. Nominal values don't have a specific order, for instance, gender identity labels or city names. Ordinal values, on the other hand, can be classified by order of magnitude. If we take t-shirt sizes as an example, we usually list them in ascending size order (XS, S, M, L, XL).
+
+---
+transition: slide-up
+level: 2
+layout: image
+image: ./images/data_types.svg
 ---
 
-# Code
+---
+transition: slide-up
+level: 2
+---
+# Find the data
+Data Formats and Structures
 
-Use code snippets and get the highlighting directly![^1]
+Data comes in many formats for different needs. Some common ones are: 
+- Tabular data: represent in columns and rows.
+- JSON objects.
+- Nested data.
+- Networks.
+- Geographic data.
+- Raw data.
 
-```ts {all|2|1-6|9|all}
-interface User {
-  id: number
-  firstName: string
-  lastName: string
-  role: string
-}
+In this talk, we'll use the tabluar data from CSV file.
 
-function updateUser(id: number, update: User) {
-  const user = getUser(id)
-  const newUser = { ...user, ...update }
-  saveUser(id, newUser)
-}
+---
+transition: slide-up
+level: 2
+---
+# Load the data
+##
+
+We load the data into the project using the `d3-fetch` module.
+
+```js
+d3.csv('src/data/1.csv', d => {
+  console.log(d);
+});
 ```
 
-<arrow v-click="3" x1="400" y1="420" x2="230" y2="330" color="#564" width="3" arrowSize="1" />
+---
+transition: slide-up
+level: 2
+---
+# Format the Data
+##
 
-[^1]: [Learn More](https://sli.dev/guide/syntax.html#line-highlighting)
+Note how the values from the count column have been fetched as strings instead of numbers. This is a common issue when importing data and is due to the type conversion of the dataset from CSV to JSON. Since the callback function of d3.csv() gives us access to the data one row at a time, it is a great place to convert the counts back into numbers. Doing so will ensure that the count values are ready to be used to generate our visualization later.
+
+```js
+d3.csv('src/data/1.csv', d => {
+  console.log(d);
+  return {
+    technology: d.technology,
+    count: +d.count,
+  }; 
+}).then(d => {
+  console.log(d);
+});
+```
+
+---
+transition: slide-up
+level: 2
+---
+# Measure the Data
+##
+
+In step 3.a of our data workflow, we have completed the data formatting part but we can still explore and measure our data using D3. Measuring specific aspects of the data can help to get situated before diving into the actual crafting of a data visualization.
+
+```js
+d3.csv('src/data/1.csv', d => {
+  return {
+    technology: d.technology,
+    count: +d.count,
+  }; 
+}).then(d => {
+  console.log(d.length);
+});
+```
 
 <style>
 .footnotes-sep {
