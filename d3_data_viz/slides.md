@@ -281,13 +281,15 @@ Selections are the basic unit of interaction in D3.js. They allow you to query a
 transition: slide-up
 level: 2
 ---
+
 # Scales
 Scales map a dimension of data to a visual representation. They are a core part of D3.js.
 
 **Why use scales?**
-- Map a continuous input domain (data) to a continuous or discrete output range (visual)
+- Map a continuous or discrete input domain (data) to a continuous or discrete output range (visual)
 - Make visual encodings of data easier by handling interpolation and normalization
 - Many types for different types of data (linear, ordinal, time, quantize, etc.)
+
 
 ---
 transition: slide-up
