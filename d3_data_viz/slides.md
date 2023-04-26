@@ -277,10 +277,10 @@ Selections are the basic unit of interaction in D3.js. They allow you to query a
 - .style() - Get or set styles
 - .on() - Add event listeners
 - .data() - Bind data (covered in Data Binding slides)
-- .enter() - Get "enter" selection (covered in Data Binding slides)
-- .exit() - Get "exit" selection  (covered in Data Binding slides)
+- .join() - Bind data  (covered in Data Binding slides)
 - .remove() - Remove elements from document
-- And many more! Selections are a core part of D3.
+
+And many more! Selections are a core part of D3.
 
 ---
 transition: slide-up
@@ -512,10 +512,13 @@ level: 2
 # Data Binding
 Data binding links input data to elements in the document.
 
-**Why data binding?**
-- Dynamically create elements based on data
-- Update, remove or modify elements based on updated data
-- The foundation for interactive, data-driven visualizations in D3
+**What is data binding?**
+
+Data Binding uses data joins to create the correspondence between an array of data and a selection of HTML or SVG elements.
+
+Joining an array to HTML/SVG elements means that:
+- HTML (or SVG) elements are added or removed such that each array element has a corresponding HTML (or SVG) element.
+- each HTML/SVG element may be positioned, sized and styled according to the value of its corresponding array element.
 
 ---
 transition: slide-up
@@ -524,13 +527,14 @@ level: 2
 # Data Binding
 Data binding links input data to elements in the document.
 
-**How does it work?**
-- Use .data() to bind data to a selection of elements
-- There are three selections made:
-  - Update selection: Existing elements with bound data
-  - Enter selection: New elements bound to new data
-  - Exit selection: Existing elements with no bound data
-- Apply operations to each selection independently
+**Creating a data join**
+
+Typically four methods are used in a data join:
+
+- .select defines the element that'll act as a container (or parent) to the joined HTML/SVG elements
+- .selectAll defines the type of element that'll be joined to each array element
+- .data defines the array that's being joined
+- .join performs the join. This is where HTML or SVG elements are added and removed
 
 ---
 transition: slide-up
@@ -539,56 +543,46 @@ level: 2
 # Data Binding
 Data binding links input data to elements in the document.
 
-**Update selection**:
-```js
-selection
-  .data(data)  // Binds data to selection
-  .text(d => d.value)  // Updates text content to match bound data
-```
+**Creating a data join**
 
-**Enter selection**:
-To append new elements for data not bound to an element yet:
-```js
-selection
+For example, suppose you've an array of five numbers which you'd like to join to circle elements: `[ 40, 10, 20, 60, 30 ]`
+
+Each time D3 performs the join it'll add or remove circle elements so that each array element has a corresponding circle element.
+
+D3 can also update the position and radius of each circle (and any other attributes or style) based on the value of the corresponding array element.
+
+---
+transition: slide-up
+level: 2
+---
+# Data Binding
+Data binding links input data to elements in the document.
+
+```js {1-2|4-8|10-14|16-23|all} {maxHeight:'400px'}
+const data = [40, 10, 20, 60, 30];
+const numberOfCircles = data.length;
+
+// Scale the circle position x
+const xScale = d3
+  .scaleLinear()
+  .domain([0, numberOfCircles])
+  .range([0, width]);
+
+// Scale the r of the circle
+const yScale = d3
+  .scaleLinear()
+  .domain(d3.extent(data))
+  .range([10, width/(2*5)]);
+
+svg
+  .selectAll('circle')
   .data(data)
-  .enter()    // Selects enter selection
-  .append("div")   // Append div for each enter selection
-  .text(d => d.value) // Set text content with bound data
+  .join('circle')
+  .attr('cx', (d, i) => xScale(i + 0.5))
+  .attr('cy', width/2)
+  .attr('r', (d) => yScale(d))
+  .style('fill', 'orange');
 ```
-
----
-transition: slide-up
-level: 2
----
-# Data Binding
-Data binding links input data to elements in the document.
-
-**Exit selection**:
-To remove elements no longer bound to data:
-```js
-selection
-  .data(data)
-  .exit()     // Selects exit selection
-  .remove()   // Remove exit selection
-```
-
-**Key functions**:
-For stable data bindings, define a key function to uniquely identify elements:
-```js
-selection
-  .data(data, d => d.id)   // d.id is the key function
-  // ...
-```
-
----
-transition: slide-up
-level: 2
----
-# Data Binding
-Data binding links input data to elements in the document.
-
-**Chaining**:
-Selections can be chained so you can bind data, update, add enter selections and remove exit selections sequentially.
 
 ---
 layout: section
