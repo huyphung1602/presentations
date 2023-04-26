@@ -192,8 +192,11 @@ There are some core concepts we need to know before creating our first chart usi
 transition: slide-up
 level: 2
 ---
+
 # Selections
 Selections are the basic unit of interaction in D3.js. They allow you to query and traverse the DOM.
+
+D3 selections let you choose some HTML or SVG elements and change their style and/or attributes.
 
 **Making a selection**:
 - Use d3.select() to select one element:
@@ -208,6 +211,7 @@ d3.select("div")  // Selects first div
 d3.selectAll("div") // Selects all divs
 ```
 - d3.selectAll() uses querySelectorAll() under the hood to find all matching elements.
+
 
 ---
 transition: slide-up
@@ -285,39 +289,48 @@ level: 2
 # Scales
 Scales map a dimension of data to a visual representation. They are a core part of D3.js.
 
-**Why use scales?**
-- Map a continuous or discrete input domain (data) to a continuous or discrete output range (visual)
-- Make visual encodings of data easier by handling interpolation and normalization
-- Many types for different types of data (linear, ordinal, time, quantize, etc.)
+Scale functions are JavaScript functions that:
+
+- Take an input (usually a number, date or category) and
+- Return a value (such as a coordinate, a colour, a length or a radius)
+
+They're typically used to transform (or 'map') data values into visual variables (such as position, length and color).
 
 
 ---
 transition: slide-up
 level: 2
 ---
+
 # Scales
 Scales map a dimension of data to a visual representation. They are a core part of D3.js.
 
-**Creating a scale**
-- Use .scaleLinear() for a continuous linear scale:
+For example, suppose you have some data: `[ 0, 2, 3, 5, 7.5, 9, 10 ]`
+
+You can create a scale function using:
 ```js
-let scale = d3.scaleLinear()
-             .domain([0, 100])     // Data domain
-             .range([0, 500])      // Visual range
+let myScale = d3.scaleLinear()
+  .domain([0, 10])
+  .range([0, 600]);
 ```
 
-- Use .scaleOrdinal() for a discrete ordinal scale:
+D3 creates a function myScale which accepts input between 0 and 10 (the domain) and maps it to output between 0 and 600 (the range).
+
+You can use myScale to calculate positions based on the data:
 ```js
-let scale = d3.scaleOrdinal()
-             .domain(["a", "b", "c"])
-             .range(["red", "blue", "green"])
+myScale(0);   // returns 0
+myScale(2);   // returns 120
+myScale(3);   // returns 180
+...
+myScale(10);  // returns 600
+
 ```
-- Other scale types: time scale for dates, quantize scale for quantizing a continuous range into discrete values, threshold scale for a two-color range, etc.
 
 ---
 transition: slide-up
 level: 2
 ---
+
 # Scales
 Scales map a dimension of data to a visual representation. They are a core part of D3.js.
 
@@ -329,11 +342,13 @@ Scales map a dimension of data to a visual representation. They are a core part 
 scale(25)     // Returns 250
 scale("b")   // Returns "blue"
 ```
+
 - invert(y) - Get x value for corresponding y value
 - domain() - Get or set input domain
 - range() - Get or set output range
 - ticks() - Get tick values for axis
 - tickFormat() - Format ticks appropriately (currency, percentage, time, etc.)
+
 
 ---
 transition: slide-up
