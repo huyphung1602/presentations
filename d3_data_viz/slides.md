@@ -603,7 +603,7 @@ transition: fade-out
 transition: slide-up
 level: 2
 layout: image
-image: .slidev/drawings/the_d3_data_flow.svg
+image: images/the_d3_data_flow.png
 ---
 # The d3 data flow
 
@@ -611,7 +611,7 @@ image: .slidev/drawings/the_d3_data_flow.svg
 transition: slide-up
 level: 2
 layout: image
-image: .slidev/drawings/1_find.svg
+image: images/1_find.png
 ---
 # Find the data
 
@@ -632,7 +632,7 @@ Qualitative data is made of non-numerical information like text. It can be nomin
 transition: slide-up
 level: 2
 layout: image
-image: .slidev/drawings/data_types.svg
+image: images/data_types.png
 ---
 
 ---
@@ -656,7 +656,7 @@ In this talk, we'll use the tabluar data from CSV file.
 transition: slide-up
 level: 2
 layout: image
-image: .slidev/drawings/2_load.svg
+image: images/2_load.png
 ---
 # Load the data
 
@@ -679,7 +679,7 @@ d3.csv('src/data/1.csv', d => {
 transition: slide-up
 level: 2
 layout: image
-image: .slidev/drawings/3a_format.svg
+image: images/3a_format.png
 ---
 # Format the data
 
@@ -708,7 +708,7 @@ d3.csv('src/data/1.csv', d => {
 transition: slide-up
 level: 2
 layout: image
-image: .slidev/drawings/3b_measure.svg
+image: images/3b_measure.png
 ---
 # Measure the data
 
@@ -741,7 +741,7 @@ d3.csv('src/data/1.csv', d => {
 transition: slide-up
 level: 2
 layout: image
-image: .slidev/drawings/4_bind.svg
+image: images/4_bind.png
 ---
 # Bind the data to DOM elements
 
@@ -788,7 +788,7 @@ const svg = selection
 transition: slide-up
 level: 2
 layout: image
-image: .slidev/drawings/the_data_binding_process.svg
+image: images/the_data_binding_process.png
 ---
 # Bind the data to DOM elements
 
@@ -836,7 +836,7 @@ function createViz(data) {
 transition: slide-up
 level: 2
 layout: image
-image: .slidev/drawings/binding_rect_formula.svg
+image: images/binding_rect_formula.png
 ---
 # Bind the data to DOM elements
 
@@ -844,7 +844,7 @@ image: .slidev/drawings/binding_rect_formula.svg
 transition: slide-up
 level: 2
 layout: image
-image: .slidev/drawings/5_scale.svg
+image: images/5_scale.png
 ---
 # Adapting the data for the screen
 
