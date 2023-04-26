@@ -602,18 +602,21 @@ transition: fade-out
 ---
 transition: slide-up
 level: 2
-layout: image
-image: images/the_d3_data_flow.png
+layout: center
 ---
 # The d3 data flow
+
+<img src="/images/the_d3_data_flow.png" alt="d3_data_flow" style="max-height: 400px; width: auto;">
+
 
 ---
 transition: slide-up
 level: 2
-layout: image
-image: images/1_find.png
+layout: center
 ---
 # Find the data
+
+<img src="/images/1_find.png" alt="1_find" style="max-height: 400px; width: auto;">
 
 ---
 transition: slide-up
@@ -631,9 +634,12 @@ Qualitative data is made of non-numerical information like text. It can be nomin
 ---
 transition: slide-up
 level: 2
-layout: image
-image: images/data_types.png
+layout: center
 ---
+# Find the data
+Data Types
+
+<img src="/images/data_types.png" alt="data_types" style="max-height: 400px; width: auto;">
 
 ---
 transition: slide-up
@@ -655,10 +661,11 @@ In this talk, we'll use the tabluar data from CSV file.
 ---
 transition: slide-up
 level: 2
-layout: image
-image: images/2_load.png
+layout: center
 ---
 # Load the data
+
+<img src="/images/2_load.png" alt="2_load" style="max-height: 400px; width: auto;">
 
 ---
 transition: slide-up
@@ -678,10 +685,11 @@ d3.csv('src/data/1.csv', d => {
 ---
 transition: slide-up
 level: 2
-layout: image
-image: images/3a_format.png
+layout: center
 ---
 # Format the data
+
+<img src="/images/3a_format.png" alt="3a_format" style="max-height: 400px; width: auto;">
 
 ---
 transition: slide-up
@@ -707,10 +715,11 @@ d3.csv('src/data/1.csv', d => {
 ---
 transition: slide-up
 level: 2
-layout: image
-image: images/3b_measure.png
+layout: center
 ---
 # Measure the data
+
+<img src="/images/3b_measure.png" alt="3b_measure" style="max-height: 400px; width: auto;">
 
 ---
 transition: slide-up
@@ -740,10 +749,11 @@ d3.csv('src/data/1.csv', d => {
 ---
 transition: slide-up
 level: 2
-layout: image
-image: images/4_bind.png
+layout: center
 ---
 # Bind the data to DOM elements
+
+<img src="/images/4_bind.png" alt="4_bind" style="max-height: 400px; width: auto;">
 
 ---
 transition: slide-up
@@ -787,10 +797,11 @@ const svg = selection
 ---
 transition: slide-up
 level: 2
-layout: image
-image: images/the_data_binding_process.png
+layout: center
 ---
 # Bind the data to DOM elements
+
+<img src="/images/the_data_binding_process.png" alt="binding_process" style="max-height: 400px; width: auto;">
 
 ---
 transition: slide-up
@@ -835,18 +846,20 @@ function createViz(data) {
 ---
 transition: slide-up
 level: 2
-layout: image
-image: images/binding_rect_formula.png
+layout: center
 ---
 # Bind the data to DOM elements
+
+<img src="/images/binding_rect_formula.png" alt="bind_rect_formula" style="max-height: 400px; width: auto;">
 
 ---
 transition: slide-up
 level: 2
-layout: image
-image: images/5_scale.png
+layout: center
 ---
 # Adapting the data for the screen
+
+<img src="/images/5_scale.png" alt="5_scale" style="max-height: 400px; width: auto;">
 
 ---
 transition: slide-up
