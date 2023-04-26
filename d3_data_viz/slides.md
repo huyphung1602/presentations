@@ -196,6 +196,7 @@ level: 2
 # Selections
 Selections are the basic unit of interaction in D3.js. They allow you to query and traverse the DOM.
 
+**What are selections?**
 D3 selections let you choose some HTML or SVG elements and change their style and/or attributes.
 
 **Making a selection**:
@@ -289,6 +290,7 @@ level: 2
 # Scales
 Scales map a dimension of data to a visual representation. They are a core part of D3.js.
 
+** What are scale functions?**
 Scale functions are JavaScript functions that:
 
 - Take an input (usually a number, date or category) and
@@ -367,13 +369,15 @@ Scales map a dimension of data to a visual representation. They are a core part 
 transition: slide-up
 level: 2
 ---
+
 # Axes
 Axes are visual representations of scales. They provide reference marks for values along a scale's domain.
 
-**Why use axes?**
-- Give viewers a reference to position, value, and units along a dimension
-- Automate the generation of axes based on scales
-- Control axis appearance by setting properties
+**What are axes?**
+
+The axis module, which draws axes, is one of the most helpful D3 modules (particularly for generating bar, line, and scatter charts).
+
+<img src="/images/axes.png" alt="axes" style="max-height: 300px; width: auto;">
 
 
 ---
@@ -401,24 +405,6 @@ level: 2
 # Axes
 Axes are visual representations of scales. They provide reference marks for values along a scale's domain.
 
-**Appending the axis to the DOM**:
-- Create a g (group) element
-- Apply a transform to position the axis
-- Append the g to your SVG or grouping element
-
-```js
-svg.append("g")
-   .attr("transform", "translate(0,500)")
-   .call(axis);
-```
-
----
-transition: slide-up
-level: 2
----
-# Axes
-Axes are visual representations of scales. They provide reference marks for values along a scale's domain.
-
 **Axis properties**:
 Some properties to customize your axis:
 - ticks: Number of ticks (and labels)
@@ -427,7 +413,15 @@ Some properties to customize your axis:
 - tickFormat: Format tick labels ($, %, time, SI prefix, etc.)
 - orient: Orientation (top, bottom, left, right)
 - tickValues: Specific tick values to use instead of D3's default
-** Uses of axes **
+
+---
+transition: slide-up
+level: 2
+---
+# Axes
+Axes are visual representations of scales. They provide reference marks for values along a scale's domain.
+
+**Uses of axes**
 - x-axis along the bottom of a chart
 - y-axis along the left side of a chart
 - Color bar axes
