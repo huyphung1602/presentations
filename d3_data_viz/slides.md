@@ -435,10 +435,8 @@ level: 2
 # Transitions
 Transitions animate and interpolate between states in D3.js visualizations.
 
-**Why use transitions?**
-- Create engaging data visualizations
-- Help the viewer understand changes between states
-- Guide the viewer's attention to important changes
+**What are transitions?**
+D3 transitions let you smoothly animate between different chart states. This article shows how to add transitions to selection updates, how to set transition duration, how to create staggered transitions, how to change the easing function, how to chain transitions and how to create custom tween functions.
 
 ---
 transition: slide-up
@@ -462,16 +460,20 @@ level: 2
 # Transitions
 Transitions animate and interpolate between states in D3.js visualizations.
 
-**Adding a transition**:
+**Adding a basic transition**:
 To a selection, call .transition() and chain a duration()method:
 ```js
-selection
+svg
+  .append('rect')
+  .attr('width', 0)
+  .attr('height', 40)
+  .style('fill', 'red')
   .transition()
   .duration(500) // Transition lasts 500ms
   .attr("width", 200) // End value
 ```
 
-This will animate the width of elements in the selection from their current width to 200px over 500ms.
+This will animate the width of elements in the selection from their current width (0px) to 200px over 500ms.
 
 ---
 transition: slide-up
