@@ -18,7 +18,7 @@ info: |
   Learn more at [Sli.dev](https://sli.dev)
 # persist drawings in exports and build
 drawings:
-  persist: false
+  persist: true
 # page transition
 transition: slide-left
 # use UnoCSS
@@ -603,7 +603,7 @@ transition: fade-out
 transition: slide-up
 level: 2
 layout: image
-image: ./images/the_d3_data_flow.svg
+image: .slidev/drawings/the_d3_data_flow.svg
 ---
 # The d3 data flow
 
@@ -611,7 +611,7 @@ image: ./images/the_d3_data_flow.svg
 transition: slide-up
 level: 2
 layout: image
-image: ./images/1_find.svg
+image: .slidev/drawings/1_find.svg
 ---
 # Find the data
 
@@ -632,7 +632,7 @@ Qualitative data is made of non-numerical information like text. It can be nomin
 transition: slide-up
 level: 2
 layout: image
-image: ./images/data_types.svg
+image: .slidev/drawings/data_types.svg
 ---
 
 ---
@@ -656,7 +656,7 @@ In this talk, we'll use the tabluar data from CSV file.
 transition: slide-up
 level: 2
 layout: image
-image: ./images/2_load.svg
+image: .slidev/drawings/2_load.svg
 ---
 # Load the data
 
@@ -679,7 +679,7 @@ d3.csv('src/data/1.csv', d => {
 transition: slide-up
 level: 2
 layout: image
-image: ./images/3a_format.svg
+image: .slidev/drawings/3a_format.svg
 ---
 # Format the data
 
@@ -708,7 +708,7 @@ d3.csv('src/data/1.csv', d => {
 transition: slide-up
 level: 2
 layout: image
-image: ./images/3b_measure.svg
+image: .slidev/drawings/3b_measure.svg
 ---
 # Measure the data
 
@@ -741,7 +741,7 @@ d3.csv('src/data/1.csv', d => {
 transition: slide-up
 level: 2
 layout: image
-image: ./images/4_bind.svg
+image: .slidev/drawings/4_bind.svg
 ---
 # Bind the data to DOM elements
 
@@ -788,7 +788,7 @@ const svg = selection
 transition: slide-up
 level: 2
 layout: image
-image: ./images/the_data_binding_process.svg
+image: .slidev/drawings/the_data_binding_process.svg
 ---
 # Bind the data to DOM elements
 
@@ -836,7 +836,7 @@ function createViz(data) {
 transition: slide-up
 level: 2
 layout: image
-image: ./images/binding_rect_formula.svg
+image: .slidev/drawings/binding_rect_formula.svg
 ---
 # Bind the data to DOM elements
 
@@ -844,7 +844,7 @@ image: ./images/binding_rect_formula.svg
 transition: slide-up
 level: 2
 layout: image
-image: ./images/5_scale.svg
+image: .slidev/drawings/5_scale.svg
 ---
 # Adapting the data for the screen
 
